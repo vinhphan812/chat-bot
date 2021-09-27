@@ -5,8 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "nodemon index.js",
-		"start": "node index",
-		"weather": "node ./modules/weather.js"
+		"start": "node index"
 	},
 	"keywords": [],
 	"author": "",
