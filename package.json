@@ -7,6 +7,9 @@
 		"test": "nodemon index.js",
 		"start": "node index"
 	},
+	"engines": {
+		"node": "15.5.1"
+	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
