@@ -10,7 +10,9 @@
 	"engines": {
 		"node": "15.5.1"
 	},
-	"keywords": [],
+	"keywords": [
+		"chat-bot"
+	],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
