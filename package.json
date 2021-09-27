@@ -1,11 +1,11 @@
 {
 	"name": "chatbot",
 	"version": "1.0.0",
-	"description": "",
+	"description": "chat bot page",
 	"main": "index.js",
 	"scripts": {
 		"test": "nodemon index.js",
-		"start": "node index"
+		"start": "node index.js"
 	},
 	"engines": {
 		"node": "15.5.1"
