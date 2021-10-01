@@ -6,7 +6,6 @@ const request = require("request-promise").defaults({
 module.exports = {
 	sendMsg: (senderId, msg) => {
 		console.log(`sender ${senderId} <==== bot reply`);
-		console.log(msg);
 		return request({
 			url: "https://graph.facebook.com/v2.6/me/messages",
 			qs: {

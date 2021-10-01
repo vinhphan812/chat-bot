@@ -54,7 +54,6 @@ module.exports = async function checkInbox(entry) {
 				if (sID == "4475146975845474") return;
 				break;
 		}
-		console.log("hi");
 		if (u.action && typeof res == "object")
 			return routeAction(u, sID, check.text);
 
@@ -153,7 +152,8 @@ async function sendSchedule(sID, uID) {
 
 		for (var day of resData) await sendMsg(sID, Sub2Text(day));
 	} catch (error) {
-		if (error.success) sendMsg(sID, error.msg);
+		console.log(error);
+		if (error.success == false) sendMsg(sID, error.msg);
 	}
 }
 

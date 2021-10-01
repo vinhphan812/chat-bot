@@ -23,6 +23,7 @@ class Huflit {
 			resolveWithFullResponse: true,
 			simple: false,
 			timeout: 25000,
+			timeout: 1000,
 			headers: {
 				accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
 				"upgrade-insecure-requests": 1,
@@ -112,7 +113,7 @@ class Huflit {
 				const { cookie } = this.data;
 
 				if (cookie) {
-					this.jar.setCookie(cookie, API_SERVER);
+					this.jar.setCookie(cookie, "https://" + API_SERVER);
 
 					const $ = await this.requestServer({
 						URI: { path: "/Home" },
@@ -169,7 +170,13 @@ class Huflit {
 					URI: { path: this.URL[t], query: p },
 				});
 				const r = [];
-				console.log($);
+				console.log($.error && !$.error.connect);
+				if ($.error && !$.error.connect)
+					return reject({
+						success: false,
+						msg: "⚠️ Server trường quá tải, vui lòng thử lại sau!!!",
+					});
+
 				const name = getText($("span")[1], ":")[1],
 					d = $("tr:not(:first-child)");
 
