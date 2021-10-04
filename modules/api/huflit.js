@@ -148,8 +148,8 @@ class Huflit {
 
 				if (!check.success) return resolve(check);
 
-				const { year, termId, weekCode } = this.data;
 				f = await this.checkWeek();
+				const { year, termId, weekCode } = this.data;
 
 				let p = {
 						StudentId: id,
@@ -215,6 +215,7 @@ class Huflit {
 						thu: getText(els[0], "(")[0].trim(),
 						data: [],
 					};
+
 				if (f && checkUpdate(i, id)) {
 					this.data.dayEndWeek = $(els[0])
 						.text()
