@@ -176,7 +176,7 @@ class Huflit {
 						msg: "⚠️ Server trường quá tải, vui lòng thử lại sau!!!",
 					});
 
-				const name = getText($("span")[1], ":")[1],
+				const name = getText($("span")[1], ":")[1].trim(),
 					d = $("tr:not(:first-child)");
 
 				// ? Check user valid
