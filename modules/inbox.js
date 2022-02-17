@@ -48,6 +48,9 @@ module.exports = async function checkInbox(entry) {
 			case 7:
 				res = tempBtn(message[3]);
 				break;
+			case 8:
+				res = tempBtn(message[6]);
+				break;
 		}
 		if (u.action && typeof res == "object")
 			return routeAction(u, sID, check.text);

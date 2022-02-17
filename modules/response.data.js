@@ -24,18 +24,26 @@ module.exports = {
 	},
 	message: [
 		{
-			t: "Choose Options",
+			t: "Bạn muốn xem tất cả các ngày trong tuần hay chỉ hôm nay:",
 			o: ["Send All Schedules", "Send Schedule Today"],
 		},
-		"Nhập mã số của bạn đi Powl sẽ giúp bạn tra cứu thời khóa biểu cho bạn...!",
+		"Nhập mã số sinh viên, giảng viên, lớp của bạn đi Powl sẽ giúp bạn tra cứu thời khóa biểu...!",
 		"Nhập Tên Giảng Viên",
 		{
-			t: "Không có gì đâuuu mà 😊! Powl được tạo ra để phục vụ bạn mà. Xem thông tin về Powl:",
+			t: "Không có gì đâuuu 😊! Powl được tạo ra để phục vụ bạn mà. Xem thông tin về Powl:",
 			o: ["Info"],
 		},
-		"💡 Tips: Dùng mã giảng viên tìm được nhập vào chat và chọn option để xem thời khóa biểu giảng viên nhá!!!",
+		"💡 Tips: Dùng mã giảng viên tìm được nhập vào chat để Powl tra cứu thời khóa biểu giảng viên nhá!!!",
 		{
-			t: "Xin Chào 👋! Mình là Powl, mình có thể giúp bạn tra cứu TKB đó, bạn muốn xem tất TKB hôm nay hay tất cả.",
+			t: "Xin Chào 👋! Mình là Powl, mình có thể giúp bạn tra cứu TKB đó:",
+			o: ["Info", "Help"],
+		},
+		{
+			t: [
+				"+ Send Schedule Today: tra cứu thời khóa biểu và thời tiết hôm nay.",
+				"+ Send All Schedules: tra cứu thời khóa biểu theo tuần hiện tại.",
+				"+ Search ID Professor: tìm kiếm mã giảng viên theo tền và sử dụng mã đó để tra cứu thời khóa biểu",
+			].join("\n"),
 			o: [
 				"Send Schedule Today",
 				"Send All Schedules",
@@ -61,14 +69,15 @@ module.exports = {
 		{ title: `🤖 Info Chat Bot `, content: '"Thời Khóa Biểu HUFLIT"' },
 		{ title: "✍️ Author: ", content: "Vinh Phan" },
 		{ title: "👼 The server was created on ", content: "23/03/2021" },
-		{ title: "⬆️ Updated: ", content: "10/07/2021" },
+		{ title: "⬆️ Updated: ", content: "18/02/2022" },
 		{
 			title: "📙 Description:\n\t",
 			content: [
-				"+ dữ liệu được lấy từ trang portal.huflit.edu.vn",
+				"+ Dữ liệu được lấy từ trang portal.huflit.edu.vn",
 				"+ Là một server API được viết bằng Javascript.",
 				"+ Chạy trên môi trường Nodejs.",
 				"+ Sử dụng NPM: Express, Request-Promise, Cheerio.",
+				"+ Sử dụng API accuweather để lấy dữ liệu thời tiết.",
 			],
 		},
 		{

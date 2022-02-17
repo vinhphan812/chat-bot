@@ -7,6 +7,7 @@ const regs = [
 	/^hi*$|hello|hey|^hi* powl$|xin chào/i,
 	/info/i,
 	/thank|cam on|cảm ơn|tks|thanks/i,
+	/help/i,
 ];
 
 module.exports = class checkMessage {
@@ -29,6 +30,7 @@ module.exports = class checkMessage {
 		else if (this.test(5)) select = 5;
 		else if (this.test(6)) select = 6;
 		else if (this.test(7)) select = 7;
+		else if (this.test(8)) select = 8;
 
 		return select;
 	}
