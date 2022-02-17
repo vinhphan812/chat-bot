@@ -11,7 +11,8 @@ module.exports = async function checkInbox(entry) {
 	const check = new CheckMessage(entry),
 		sID = check.sID;
 
-	let res = tempBtn(err[2]);
+	// let res = tempBtn(err[2]);
+	let res;
 
 	console.log(`sender ${sID} ====> inbox bot`);
 
@@ -51,7 +52,7 @@ module.exports = async function checkInbox(entry) {
 		if (u.action && typeof res == "object")
 			return routeAction(u, sID, check.text);
 
-		return sendMsg(sID, res);
+		if (res) return sendMsg(sID, res);
 	} catch (error) {
 		console.log(error);
 		sendMsg(sID, "⚠️ Có Sự Cố Rồi Hicc 😢!!!");
