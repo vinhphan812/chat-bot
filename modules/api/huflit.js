@@ -11,6 +11,22 @@ const regs = [
 
 class Huflit {
 	constructor() {
+		const headers = {
+			accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+			"upgrade-insecure-requests": 1,
+			"accept-language": "vi,en-US;q=0.9,en;q=0.8",
+			origin: "https://portal.huflit.edu.vn",
+			"sec-ch-ua":
+				'"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+			"sec-ch-ua-mobile": "?0",
+			"sec-fetch-dest": "document",
+			"sec-fetch-mode": "navigate",
+			"sec-fetch-site": "same-origin",
+			"sec-fetch-user": "?1",
+			"user-agent":
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36 Edg/84.0.522.59",
+		};
+
 		this.jar = request.jar();
 
 		this.URL = [
@@ -23,21 +39,7 @@ class Huflit {
 			resolveWithFullResponse: true,
 			simple: false,
 			timeout: 25000,
-			headers: {
-				accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-				"upgrade-insecure-requests": 1,
-				"accept-language": "vi,en-US;q=0.9,en;q=0.8",
-				origin: "https://portal.huflit.edu.vn",
-				"sec-ch-ua":
-					'"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
-				"sec-ch-ua-mobile": "?0",
-				"sec-fetch-dest": "document",
-				"sec-fetch-mode": "navigate",
-				"sec-fetch-site": "same-origin",
-				"sec-fetch-user": "?1",
-				"user-agent":
-					"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36 Edg/84.0.522.59",
-			},
+			headers,
 		});
 	}
 

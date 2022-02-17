@@ -40,7 +40,7 @@ module.exports = {
 				payload: {
 					template_type: "button",
 					text: t,
-					buttons: pBack(o),
+					buttons: postback(o),
 				},
 			},
 		};
@@ -54,8 +54,8 @@ module.exports = {
  * @param {String[]} options
  * @returns {button[]} button list (1 <= length <= 3)
  */
-function pBack(options) {
-	return options.map(function (msg) {
+function postback(options) {
+	return options.map((msg) => {
 		return {
 			type: "postback",
 			title: msg,

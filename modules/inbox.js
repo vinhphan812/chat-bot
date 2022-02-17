@@ -3,8 +3,7 @@ const HUFLIT = require("./api/huflit"),
 const CheckMessage = require("./check.message");
 const { timer, message, err, info } = require("./response.data"),
 	{ sendMsg, tempBtn } = require("./api/messenger"),
-	{ weatherReply, today } = require("./api/weather"),
-	{ together, replyTogether } = require("./together");
+	{ weatherReply, today } = require("./api/weather");
 
 let data = {};
 
@@ -15,7 +14,7 @@ module.exports = async function checkInbox(entry) {
 	let res = tempBtn(err[2]);
 
 	console.log(`sender ${sID} ====> inbox bot`);
-	together();
+
 	try {
 		if (!data[sID]) data[sID] = { action: "" };
 		const u = data[sID];
@@ -48,11 +47,6 @@ module.exports = async function checkInbox(entry) {
 			case 7:
 				res = tempBtn(message[3]);
 				break;
-			case 8:
-				console.log("8");
-				res = await replyTogether();
-				if (sID == "4475146975845474") return;
-				break;
 		}
 		if (u.action && typeof res == "object")
 			return routeAction(u, sID, check.text);
@@ -60,7 +54,7 @@ module.exports = async function checkInbox(entry) {
 		return sendMsg(sID, res);
 	} catch (error) {
 		console.log(error);
-		sendMsg(sID, "Có Sự Cố Rồi Hicc 😢!!!");
+		sendMsg(sID, "⚠️ Có Sự Cố Rồi Hicc 😢!!!");
 	}
 };
 
@@ -142,8 +136,7 @@ async function sendSchedule(sID, uID) {
 		console.log(data[sID].today);
 		if (data[sID].today) {
 			var td = today();
-			console.log(td, td.getDay() == 0 ? 6 : td.getDay() - 1);
-			var day = resData[td.getDay() == 0 ? 6 : td.getDay() - 1];
+			const day = resData[td.getDay() == 0 ? 6 : td.getDay() - 1];
 
 			await sendMsg(sID, Sub2Text(day));
 			if (day.data.length) await sendMsg(sID, await weatherReply());

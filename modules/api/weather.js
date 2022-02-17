@@ -1,5 +1,8 @@
 const request = require("request-promise");
 const { makeURL } = require("../data");
+
+const weathers = ["🌧️", "☀️"];
+
 const apiOption = {
 	apikey: process.env.API_KEY_WEATHER,
 	language: "vi",
@@ -11,7 +14,6 @@ const location = "3554442",
 	path = ["/forecasts/v1/daily/1day/", "/currentconditions/v1/"];
 
 function requestWeather(type, local) {
-	// host + path[type] + local,
 	if (type == 1) apiOption.details = false;
 	else apiOption.details = true;
 	const uri = makeURL(host, path[type] + local, apiOption);
@@ -81,7 +83,7 @@ function AirQualityMessage(status) {
 }
 
 function ShortPhrase(text, isRain) {
-	return `${isRain ? "🌧️" : "☀️"} ${text}.`;
+	return `${weathers[+isRain]} ${text}.`;
 }
 
 function temperatureMessage({ Minimum, Maximum }, current) {

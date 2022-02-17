@@ -1,19 +1,17 @@
 const regs = [
-		/\d{2}dh\d{6}|\d{5}|\D{2}\d{4}/i,
-		/send all schedules|tất cả|all|tat ca/i,
-		/send schedule today|hôm nay|today/i,
-		/weather|thời tiết|thoi tiet|thoitiet/i,
-		/Search ID Professor/i,
-		/^hi*$|hello|hey|^hi* powl$|xin chào/i,
-		/info/i,
-		/thank|cam on|cảm ơn|tks|thanks/i,
-		/thíanh|thí anh|thuýanh|thúy anh|thianh|thisanh/i,
-	],
-	id = /^\d{2}dh\d{6}$|^\d{5}$|^\D{2}\d{4}$/i;
+	/\d{2}dh\d{6}|\d{5}|\D{2}\d{4}/i, // mssv|gv|class
+	/send all schedules|tất cả|all|tat ca/i,
+	/send schedule today|hôm nay|today|hom nay/i,
+	/weather|thời tiết|thoi tiet|thoitiet/i,
+	/Search ID Professor/i,
+	/^hi*$|hello|hey|^hi* powl$|xin chào/i,
+	/info/i,
+	/thank|cam on|cảm ơn|tks|thanks/i,
+];
 
 module.exports = class checkMessage {
-	constructor(entry) {
-		const msg = entry.messaging[0];
+	constructor({ messaging }) {
+		const [msg] = messaging;
 		this.sID = msg.sender.id;
 		this.text = this.getMessage(msg);
 	}
@@ -31,7 +29,6 @@ module.exports = class checkMessage {
 		else if (this.test(5)) select = 5;
 		else if (this.test(6)) select = 6;
 		else if (this.test(7)) select = 7;
-		else if (this.test(8)) select = 8;
 
 		return select;
 	}

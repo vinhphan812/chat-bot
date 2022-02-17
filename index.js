@@ -2,8 +2,7 @@ require("dotenv").config();
 
 const http = require("http"),
 	express = require("express"),
-	path = require("path"),
-	{ together } = require("./modules/together");
+	path = require("path");
 
 const { verify, chat } = require("./Controller/webhook.controller");
 
@@ -17,15 +16,12 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, "public")));
-var server = http.createServer(app);
+const server = http.createServer(app);
 
-app.get("/", (req, res) => {
-	together();
-	res.send("Hook messenger Bot Thời Khóa Biểu HUFLIT");
-});
-
+app.get("/", (req, res) =>
+	res.send("Hook messenger Bot Thời Khóa Biểu HUFLIT")
+);
 app.get("/webhook", verify);
-
 app.post("/webhook", chat);
 
 app.set("port", process.env.PORT || 5000);
