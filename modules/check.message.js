@@ -4,7 +4,7 @@ const regs = [
 	/send schedule today|hôm nay|today|hom nay/i,
 	/weather|thời tiết|thoi tiet|thoitiet/i,
 	/Search ID Professor/i,
-	/^hi*$|hello|hey|^hi* powl$|xin chào/i,
+	/^hi*$|hello|hey|^hi* powl$|xin chào|xin chaof|xin chao|xinchao/i,
 	/info/i,
 	/thank|cam on|cảm ơn|tks|thanks/i,
 	/help/i,

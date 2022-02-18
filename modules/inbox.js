@@ -52,8 +52,7 @@ module.exports = async function checkInbox(entry) {
 				res = tempBtn(message[6]);
 				break;
 		}
-		if (u.action && typeof res == "object")
-			return routeAction(u, sID, check.text);
+		if (u.action && !res) return routeAction(u, sID, check.text);
 
 		if (res) return sendMsg(sID, res);
 	} catch (error) {
