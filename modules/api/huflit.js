@@ -70,6 +70,7 @@ class Huflit {
 
 	login() {
 		return new Promise(async (resolve, reject) => {
+			const valid = ["Object moved", "Cổng thông tin đào tạo"];
 			try {
 				if (!this.data) this.data = await readData();
 				const getCookie = () =>
@@ -85,11 +86,8 @@ class Huflit {
 						},
 					}),
 					title = $("title").text();
-				console.log(title);
-				if (
-					title != "Object moved" &&
-					title != "Cổng thông tin đào tạo"
-				)
+
+				if (valid.includes(title))
 					return resolve({
 						success: false,
 						msg: "⚠️ Server trường không khả dụng!!!",
@@ -171,7 +169,6 @@ class Huflit {
 					URI: { path: this.URL[t], query: p },
 				});
 				const r = [];
-				console.log($.error && !$.error.connect);
 				if ($.error && !$.error.connect)
 					return reject({
 						success: false,
@@ -201,7 +198,7 @@ class Huflit {
 				});
 				resolve({
 					success: true,
-					resData: r,
+					data: r,
 					name: name.replace("  ", " "),
 					isHaveSchedule: isHaveSchedule,
 					termId: termId,
@@ -236,6 +233,7 @@ class Huflit {
 						for (var i = 0; i < s.length; i++) {
 							var ex = s[i]
 								.replace(/<br>/g, "")
+								.replace("-&gt;", "->")
 								.split(regs[0]);
 							res.data.push(new SubjectP(ex));
 						}

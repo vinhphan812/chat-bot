@@ -4,7 +4,8 @@ const http = require("http"),
 	express = require("express"),
 	path = require("path");
 
-const { verify, chat } = require("./Controller/webhook.controller");
+const testRoute = require("./routers/test.route");
+const { verify, chat } = require("./controllers/webhook.controller");
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.use(
 	})
 );
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/test", testRoute);
 const server = http.createServer(app);
 
 app.get("/", (req, res) =>

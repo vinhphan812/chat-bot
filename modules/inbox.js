@@ -5,7 +5,7 @@ const { timer, message, err, info } = require("./response.data"),
 	{ sendMsg, tempBtn } = require("./api/messenger"),
 	{ weatherReply, today } = require("./api/weather");
 
-let data = {};
+let dataUser = {};
 
 module.exports = async function checkInbox(entry) {
 	const check = new CheckMessage(entry),
@@ -17,8 +17,8 @@ module.exports = async function checkInbox(entry) {
 	console.log(`sender ${sID} ====> inbox bot`);
 
 	try {
-		if (!data[sID]) data[sID] = { action: "" };
-		const u = data[sID];
+		if (!dataUser[sID]) dataUser[sID] = { action: "" };
+		const u = dataUser[sID];
 
 		// check action
 		switch (check.check()) {
@@ -62,7 +62,9 @@ module.exports = async function checkInbox(entry) {
 };
 
 function isExist(id) {
-	return data[id].schedule && data[id].user == data[id].schedule.id;
+	return (
+		dataUser[id].schedule && dataUser[id].user == dataUser[id].schedule.id
+	);
 }
 
 async function routeAction({ user, action }, sID, text) {
@@ -74,7 +76,7 @@ async function routeAction({ user, action }, sID, text) {
 				break;
 			case "Search":
 				Search(sID, text);
-				data[sID].action = "";
+				dataUser[sID].action = "";
 				break;
 		}
 	} catch (error) {
@@ -107,20 +109,23 @@ async function Search(id, name) {
 async function sendSchedule(sID, uID) {
 	try {
 		if (!isExist(sID)) {
-			data[sID].schedule = await api.getSchedule(uID, data[sID].today);
-			data[sID].schedule.id = uID;
+			dataUser[sID].schedule = await api.getSchedule(
+				uID,
+				dataUser[sID].today
+			);
+			dataUser[sID].schedule.id = uID;
 		}
-		const { success, name, resData, isHaveSchedule, msg, termId } =
-			data[sID].schedule;
+		const { success, name, data, isHaveSchedule, msg, termId } =
+			dataUser[sID].schedule;
 
-		console.log(data[sID].schedule);
+		console.log(dataUser[sID].schedule);
 
 		if (!success) {
-			data[sID].user = "";
+			dataUser[sID].user = "";
 			return sendMsg(sID, msg);
 		}
 
-		data[sID].action = "";
+		dataUser[sID].action = "";
 
 		if (!isHaveSchedule) {
 			const type =
@@ -136,17 +141,17 @@ async function sendSchedule(sID, uID) {
 		}
 
 		await sendMsg(sID, `📅 ${termId} Schedule of ${name}\n`);
-		console.log(data[sID].today);
-		if (data[sID].today) {
+		console.log(dataUser[sID].today);
+		if (dataUser[sID].today) {
 			var td = today();
-			const day = resData[td.getDay() == 0 ? 6 : td.getDay() - 1];
+			const day = data[td.getDay() == 0 ? 6 : td.getDay() - 1];
 
 			await sendMsg(sID, Sub2Text(day));
 			if (day.data.length) await sendMsg(sID, await weatherReply());
 			return;
 		}
 
-		for (var day of resData) await sendMsg(sID, Sub2Text(day));
+		for (var day of data) await sendMsg(sID, Sub2Text(day));
 	} catch (error) {
 		console.log(error);
 		if (error.success == false) sendMsg(sID, error.msg);
