@@ -86,8 +86,7 @@ class Huflit {
 						},
 					}),
 					title = $("title").text();
-
-				if (valid.includes(title))
+				if (!valid.includes(title))
 					return resolve({
 						success: false,
 						msg: "⚠️ Server trường không khả dụng!!!",
