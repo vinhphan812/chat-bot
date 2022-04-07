@@ -19,9 +19,7 @@ app.use(
 app.use("/test", testRoute);
 const server = http.createServer(app);
 
-app.get("/", (req, res) =>
-	res.send("Hook messenger Bot Thời Khóa Biểu HUFLIT")
-);
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "./index.html")));
 app.get("/webhook", verify);
 app.post("/webhook", chat);
 
