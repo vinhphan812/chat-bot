@@ -294,7 +294,7 @@ class Huflit {
 			});
 			this.data.ProfessorList = data;
 			writeData(this.data);
-			resolve(true);
+			resolve({ success: true, data });
 		});
 	}
 
