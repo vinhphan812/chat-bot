@@ -9,8 +9,8 @@ const http = require("http"),
 const testRoute = require("./routers/test.route");
 const { verify, chat } = require("./controllers/webhook.controller");
 
-const key = fs.readFileSync("./selfsigned.key", "utf8");
-const cert = fs.readFileSync("./selfsigned.crt", "utf8");
+const key = fs.readFileSync("./key.pem");
+const cert = fs.readFileSync("./cert.pem");
 
 const credentials = { key, cert };
 
@@ -29,7 +29,7 @@ app.get("/", (req, res) => res.sendFile(path.join(__dirname, "./index.html")));
 app.get("/webhook", verify);
 app.post("/webhook", chat);
 
-app.set("port", process.env.PORT || 8080);
+app.set("port", process.env.PORT || 80);
 app.set("ip", process.env.IP || "0.0.0.0");
 
 var httpServer = http.createServer(app);
