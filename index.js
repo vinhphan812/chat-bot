@@ -2,10 +2,17 @@ require("dotenv").config();
 
 const http = require("http"),
 	express = require("express"),
-	path = require("path");
+	path = require("path"),
+	https = require("https"),
+	fs = require("fs");
 
 const testRoute = require("./routers/test.route");
 const { verify, chat } = require("./controllers/webhook.controller");
+
+const key = fs.readFileSync("./selfsigned.key", "utf8");
+const cert = fs.readFileSync("./selfsigned.crt", "utf8");
+
+const credentials = { key, cert };
 
 const app = express();
 
@@ -17,16 +24,26 @@ app.use(
 );
 
 app.use("/test", testRoute);
-const server = http.createServer(app);
 
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "./index.html")));
 app.get("/webhook", verify);
 app.post("/webhook", chat);
 
-app.set("port", process.env.PORT || 5000);
+app.set("port", process.env.PORT || 8080);
 app.set("ip", process.env.IP || "0.0.0.0");
 
-server.listen(app.get("port"), app.get("ip"), function () {
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+// httpServer.listen(app.get("port"), app.get("ip"), function () {
+// 	console.log(
+// 		"Chat bot server listening at %s:%d ",
+// 		app.get("ip"),
+// 		app.get("port")
+// 	);
+// });
+
+httpsServer.listen(app.get("port"), app.get("ip"), function () {
 	console.log(
 		"Chat bot server listening at %s:%d ",
 		app.get("ip"),
