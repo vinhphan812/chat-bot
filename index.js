@@ -2,17 +2,10 @@ require("dotenv").config();
 
 const http = require("http"),
 	express = require("express"),
-	path = require("path"),
-	https = require("https"),
-	fs = require("fs");
+	path = require("path");
 
 const testRoute = require("./routers/test.route");
 const { verify, chat } = require("./controllers/webhook.controller");
-
-// const key = fs.readFileSync("./key.pem");
-// const cert = fs.readFileSync("./cert.pem");
-
-// const credentials = { key, cert };
 
 const app = express();
 
@@ -29,7 +22,7 @@ app.get("/", (req, res) => res.sendFile(path.join(__dirname, "./index.html")));
 app.get("/webhook", verify);
 app.post("/webhook", chat);
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT);
 app.set("ip", process.env.IP || "0.0.0.0");
 
 var httpServer = http.createServer(app);
