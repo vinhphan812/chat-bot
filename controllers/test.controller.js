@@ -1,4 +1,5 @@
 const HUFLIT = require("../modules/api/huflit");
+const { readData, writeData } = require("../modules/data");
 
 module.exports = {
 	schedule: async (req, res, next) => {
@@ -45,5 +46,23 @@ module.exports = {
 		} catch ({ message }) {
 			res.json({ success: false, message });
 		}
+	},
+	attributesPage: async (req, res, next) => {
+		const { cookie, ...data } = await readData();
+		res.json(data);
+	},
+	updateAttributes: async (req, res, next) => {
+		const { termId, year, weekCode } = req.body;
+
+		const data = await readData();
+
+		if (termId) data.termId = termId;
+		if (year) data.year = year;
+		if (weekCode) data.weekCode = weekCode;
+
+		await writeData(data);
+
+		const { cookie, ...resData } = data;
+		res.json(resData);
 	},
 };
