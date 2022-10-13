@@ -167,6 +167,7 @@ class Huflit {
 				$ = await this.requestServer({
 					URI: { path: this.URL[t], query: p },
 				});
+				console.log($);
 				const r = [];
 				if ($.error && !$.error.connect)
 					return reject({
