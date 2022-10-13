@@ -199,6 +199,7 @@ class Huflit {
 					r.push(data);
 				});
 
+				console.log(r);
 				resolve({
 					success: true,
 					data: r,
