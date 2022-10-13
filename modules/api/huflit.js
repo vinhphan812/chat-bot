@@ -189,7 +189,8 @@ class Huflit {
 					});
 				}
 
-				var isHaveSchedule = false;
+				let isHaveSchedule = false;
+
 				await d.each(async (i, e) => {
 					const data = await extractData(i, e);
 					console.log(data.data, data.data.length);
