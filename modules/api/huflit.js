@@ -167,13 +167,16 @@ class Huflit {
 				$ = await this.requestServer({
 					URI: { path: this.URL[t], query: p },
 				});
+
 				const r = [];
+
 				if ($.error && !$.error.connect)
 					return reject({
 						success: false,
 						msg: "⚠️ Server trường quá tải, vui lòng thử lại sau!!!",
 					});
 
+				let isHaveSchedule = false;
 				const name = getText($("span")[1], ":")[1].trim(),
 					d = $("tr:not(:first-child)");
 
@@ -188,8 +191,6 @@ class Huflit {
 						msg: msg,
 					});
 				}
-
-				let isHaveSchedule = false;
 
 				await d
 					.each(async (i, e) => {
