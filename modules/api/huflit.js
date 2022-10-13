@@ -192,14 +192,12 @@ class Huflit {
 					});
 				}
 
-				await d.each(async (i, e) => {
-					const data = await extractData(i, e);
-					console.log(data.data.length);
+				for (var i = 0; i < d.length; i++) {
+					const data = await extractData(i, d[i]);
 					if (data.data.length > 0) isHaveSchedule = true;
 					r.push(data);
-				});
+				}
 
-				console.log(r);
 				resolve({
 					success: true,
 					data: r,
@@ -212,6 +210,7 @@ class Huflit {
 				if (!error.success) return reject(error);
 				reject({ success: false, msg: "⚠️ server error" });
 			}
+
 			async function extractData(i, e) {
 				let els = $(e).children(),
 					res = {
