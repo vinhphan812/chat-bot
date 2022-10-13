@@ -191,19 +191,22 @@ class Huflit {
 
 				let isHaveSchedule = false;
 
-				await d.each(async (i, e) => {
-					const data = await extractData(i, e);
-					console.log(data.data.length);
-					if (data.data.length > 0) isHaveSchedule = true;
-					r.push(data);
-				});
-				resolve({
-					success: true,
-					data: r,
-					name: name.replace("  ", " "),
-					isHaveSchedule,
-					termId: termId,
-				});
+				await d
+					.each(async (i, e) => {
+						const data = await extractData(i, e);
+						console.log(data.data.length);
+						if (data.data.length > 0) isHaveSchedule = true;
+						r.push(data);
+					})
+					.then(() => {
+						resolve({
+							success: true,
+							data: r,
+							name: name.replace("  ", " "),
+							isHaveSchedule,
+							termId: termId,
+						});
+					});
 			} catch (error) {
 				console.log("log" + error);
 				if (!error.success) return reject(error);
