@@ -192,7 +192,7 @@ class Huflit {
 				var isHaveSchedule = false;
 				await d.each(async (i, e) => {
 					const data = await extractData(i, e);
-					console.log(data, data.data, data.length);
+					console.log(data.data, data.data.length);
 					if (data.data.length > 0) isHaveSchedule = true;
 					r.push(data);
 				});
