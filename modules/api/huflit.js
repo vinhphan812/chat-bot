@@ -286,8 +286,9 @@ class Huflit {
 
 	getListProfessor() {
 		return new Promise(async (resolve, reject) => {
+			const { year, termId } = this.data;
 			var $ = await this.requestServer({
-				URI: { path: "/Home/GetProfessorByTerm/2020-2021$HK02" },
+				URI: { path: `/Home/GetProfessorByTerm/${year}$${termId}` },
 			});
 			var data = JSON.parse($("body").text());
 			data = data.map(({ ProfessorID: code, ProfessorName: n }) => {
